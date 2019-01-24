@@ -17,9 +17,11 @@ import RasterLayer from "./components/layer/RasterLayer";
 
 import controlMixin from "./components/UI/controls/controlMixin";
 import withRegistration from "./lib/withRegistration";
+import pluginMixin from "./pluginMixin";
 
 export const mglRegistrationMixin = withRegistration;
 export const mglControlMixin = controlMixin;
+export const mglPluginMixin = pluginMixin;
 
 export const MglMap = GlMap;
 
