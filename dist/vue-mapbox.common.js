@@ -4510,7 +4510,7 @@ module.exports = /******/ (function(modules) {
         maxZoom: Number,
         paint: Object,
         layout: Object,
-        before: Object,
+        before: String,
         filter: undefined
       };
       var componentProps = {
@@ -5249,6 +5249,10 @@ module.exports = /******/ (function(modules) {
             type: String,
             required: true
           },
+          type: {
+            type: String,
+            default: "fill"
+          },
           bounds: {
             type: Array,
             default: function _default() {
@@ -5305,9 +5309,9 @@ module.exports = /******/ (function(modules) {
             if (payload.mapId !== this.mapId) return;
             this.map = payload.map;
             var source = {
-              type: "vector",
-              url: this.url
+              type: "vector"
             };
+            if (this.url) source.url = this.url;
             if (this.tiles) source.tiles = this.tiles;
             if (this.tilesMinZoom) source.minzoom = this.tilesMinZoom;
             if (this.tilesMaxZoom) source.maxzoom = this.tilesMinZoom;
@@ -5360,7 +5364,7 @@ module.exports = /******/ (function(modules) {
             if (this.refLayer) {
               layer.ref = this.refLayer;
             } else {
-              layer.type = this.type ? this.type : "fill";
+              layer.type = this.type;
               layer.source = this.sourceId;
               if (this.minzoom) layer.minzoom = this.minzoom;
               if (this.maxzoom) layer.maxzoom = this.maxzoom;
@@ -5527,16 +5531,10 @@ module.exports = /******/ (function(modules) {
           }
         }
       };
-      // CONCATENATED MODULE: ./src/pluginMixin.js
-
-      /* harmony default export */ var pluginMixin = {
-        mixins: [withRegistration, withEvents, withSelfEvents]
-      };
       // CONCATENATED MODULE: ./src/main.js
 
       var mglRegistrationMixin = withRegistration;
       var mglControlMixin = controlMixin;
-      var mglPluginMixin = pluginMixin;
       var MglMap = GlMap;
       var MglNavigationControl = NavigationControl;
       var MglGeolocateControl = GeolocateControl;
@@ -5597,13 +5595,6 @@ module.exports = /******/ (function(modules) {
         "mglControlMixin",
         function() {
           return mglControlMixin;
-        }
-      );
-      /* concated harmony reexport mglPluginMixin */ __webpack_require__.d(
-        __webpack_exports__,
-        "mglPluginMixin",
-        function() {
-          return mglPluginMixin;
         }
       );
       /* concated harmony reexport MglMap */ __webpack_require__.d(
