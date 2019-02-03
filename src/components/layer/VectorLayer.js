@@ -25,6 +25,10 @@ export default {
       type: String,
       required: true
     },
+    type: {
+      type: String,
+      default: "fill"
+    },
     bounds: {
       type: Array,
       default: () => [-180, -85.051129, 180, 85.051129]
@@ -77,10 +81,10 @@ export default {
       if (payload.mapId !== this.mapId) return;
       this.map = payload.map;
       let source = {
-        type: "vector",
-        url: this.url
+        type: "vector"
       };
 
+      if (this.url) source.url = this.url;
       if (this.tiles) source.tiles = this.tiles;
       if (this.tilesMinZoom) source.minzoom = this.tilesMinZoom;
       if (this.tilesMaxZoom) source.maxzoom = this.tilesMinZoom;
@@ -129,7 +133,7 @@ export default {
       if (this.refLayer) {
         layer.ref = this.refLayer;
       } else {
-        layer.type = this.type ? this.type : "fill";
+        layer.type = this.type;
         layer.source = this.sourceId;
         if (this.minzoom) layer.minzoom = this.minzoom;
         if (this.maxzoom) layer.maxzoom = this.maxzoom;
