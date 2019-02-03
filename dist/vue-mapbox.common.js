@@ -5302,6 +5302,11 @@ module.exports = /******/ (function(modules) {
           filter: function filter(_filter) {
             if (this.initial) return;
             this.map.setFilter(this.layerId, _filter);
+          },
+          sourceLayer: function sourceLayer(sourceLayer) {
+            if (this.initial) return;
+            this.map.removeLayer(this.layerId);
+            this.$_addLayer();
           }
         },
         methods: {
