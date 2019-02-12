@@ -76,10 +76,8 @@ export default {
     paint(properties) {
       if (this.initial) return;
       for (let prop of Object.keys(this.paint)) {
-        if (this.paint[prop] !== properties[prop]) {
-          this.map.setPaintProperty(this.layerId, prop, properties[prop]);
-          this.paint[prop] = properties[prop];
-        }
+        this.map.setPaintProperty(this.layerId, prop, properties[prop]);
+        this.paint[prop] = properties[prop];
       }
     },
     layout(properties) {
